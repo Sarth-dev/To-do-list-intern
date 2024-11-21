@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const todoPriority = document.getElementById("todoPriority");
     const addTodoButton = document.getElementById("addTodo");
     const todoList = document.getElementById("todoList");
+    const searchBar = document.getElementById("searchBar");
 
-    
     const filterAllButton = document.getElementById("filterAll");
     const filterPendingButton = document.getElementById("filterPending");
     const filterCompletedButton = document.getElementById("filterCompleted");
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let todos = []; 
 
-    
+   
     const addTodo = () => {
         const text = todoInput.value.trim();
         const date = todoDate.value;
@@ -40,14 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
         todos.push(newTodo);
         sortTodos();
         renderTodos();
-   
         todoInput.value = "";
         todoDate.value = "";
         todoCategory.value = "";
         todoPriority.value = "";
     };
 
-  
+
     const toggleComplete = (id) => {
         todos = todos.map((todo) =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTodos();
     };
 
-
+   
     const deleteTodo = (id) => {
         todos = todos.filter((todo) => todo.id !== id);
         renderTodos();
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    
+   
     const filterTodos = (filter) => {
         let filteredTodos = [];
         if (filter === "Pending") {
@@ -84,7 +83,17 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTodos(filteredTodos);
     };
 
+   
+    const searchTodos = (searchTerm) => {
+        const filteredTodos = todos.filter((todo) =>
+            todo.text.toLowerCase().includes(searchTerm) ||
+            todo.category.toLowerCase().includes(searchTerm) ||
+            todo.priority.toLowerCase().includes(searchTerm)
+        );
+        renderTodos(filteredTodos);
+    };
 
+    
     const renderTodos = (list = todos) => {
         todoList.innerHTML = "";
         list.forEach((todo) => {
@@ -105,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-   
+  
     addTodoButton.addEventListener("click", addTodo);
     filterAllButton.addEventListener("click", () => filterTodos("All"));
     filterPendingButton.addEventListener("click", () => filterTodos("Pending"));
@@ -114,7 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
     filterPersonalButton.addEventListener("click", () => filterTodos("Personal"));
     filterCollegeButton.addEventListener("click", () => filterTodos("College"));
 
-   
+  
+    searchBar.addEventListener("input", (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        searchTodos(searchTerm);
+    });
+
+    
     window.toggleComplete = toggleComplete;
     window.deleteTodo = deleteTodo;
 });

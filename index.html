@@ -28,6 +28,17 @@
             </select>
             <button id="addTodo" class="btn btn-primary mt-2">Add</button>
         </div>
+        
+       
+        <div class="mb-4">
+            <input
+                type="text"
+                id="searchBar"
+                class="form-control rounded-md outline-none"
+                placeholder="Search tasks by name, category, or priority..."
+            />
+        </div>
+        
         <div class="mb-3">
             <button class="btn btn-outline-secondary" id="filterAll">All</button>
             <button class="btn btn-outline-secondary" id="filterPending">Pending</button>
@@ -39,11 +50,10 @@
         <ul id="todoList" class="list-group">
             <!-- To-Do items will be rendered here -->
         </ul>
+
+        
     </div>
 
-
-
-    
     <script src="script.js"></script>
 </body>
 </html>
