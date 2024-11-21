@@ -1,0 +1,17 @@
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.shadow{
+    box-shadow: inset offset-x offset-y blur-radius spread-radius color;
+}
+
+input{
+    outline: transparent;
+}
+
+input::selection{
+    background-color: transparent;
+    outline: none;
+}
